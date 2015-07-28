@@ -63,6 +63,20 @@
         });
     }
 
+    function getQuestionIndex(survey, id){
+        return _.findIndex(survey.questions, function(item){
+            return item.id === id;
+        });
+    }
+
+    function getProgress(survey, index){
+        var progress = 100;
+        if (survey.questions.length){
+            progress = parseInt((index) * 100 / survey.questions.length, 10);
+        }
+        return progress;
+    }
+
     angularModule.controller("surveysListController", function ($scope) {
         $scope.surveys = surveyMock;
     });
@@ -73,8 +87,13 @@
 
     angularModule.controller("questionController", function($scope, $routeParams){
         var survey = getSurveyById($routeParams.sid);
+        var questionIndex = getQuestionIndex(survey, $routeParams.qid) + 1;
+
         $scope.surveyName = survey.name;
         $scope.question = getQuestionById(survey, $routeParams.qid);
+        $scope.progress = getProgress(survey, questionIndex);
+        $scope.questionIndex = questionIndex;
+
     });
 
 })();
