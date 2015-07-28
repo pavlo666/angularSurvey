@@ -1,0 +1,12 @@
+{
+    "name": "SURVEY",
+    "description": "CRUD Survey angular test",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "angular": "1.3.x",
+        "bootstrap": "3.3.x",
+        "angular-bootstrap": "0.13.0",
+        "angular-route": "~1.3.0"
+    }
+}
