@@ -1,6 +1,21 @@
 <div ng-controller="surveysListController">
     <h2> Survey List </h2>
-    <div class="list-group">
-        <a href="#/surveys/{{survey.id}}" class="list-group-item" ng-repeat="survey in surveys">{{survey.name}}</a>
+
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4" ng-repeat="survey in surveys">
+            <div class="thumbnail">
+
+                <div class="caption">
+                    <h4><span class="label label-default">{{survey.name}}</span></h4>
+                    <h5>{{survey.description}}</h5>
+                    <p>
+                        <button type="button" class="btn btn-default"><a href="#/surveys/{{survey.id}}/question/1">Start</a></button>
+                        <button type="button" class="btn btn-default"> <a href="#/results:{{survey.id}}">Results</a></button>
+                        <button type="button" class="btn btn-default"> <a href="#/edit:{{survey.id}}">Change</a></button>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -42,7 +42,7 @@
     },{
         id : "3",
         name: "IT service",
-        description : "Provide feedback on IT department work",
+        description : "Provide feedback on IT department work, PC and laptops speed of resolving issues.",
         questions: []
     },{
         id : "4",

@@ -8,7 +8,6 @@
     angularModule.config(['$routeProvider', function($routeProvider) {
         $routeProvider.
             when("/surveys", {templateUrl: "partials/surveyList.html"}).
-            when("/surveys/:id", {templateUrl: "partials/surveyPage.html"}).
             when("/surveys/:sid/question/:qid", {templateUrl: "partials/questionPage.html"}).
             when("/results/:id", {templateUrl: "partials/results.html"}).
             when("/edit/:id", {templateUrl: "partials/addSurvey.html"}).
