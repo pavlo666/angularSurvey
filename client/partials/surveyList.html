@@ -1,6 +1,6 @@
 <div ng-controller="surveysListController">
     <h2> Survey List </h2>
     <div class="list-group">
-        <a href="#/surveys:123" class="list-group-item" ng-repeat="survey in surveys">{{survey.name}}</a>
+        <a href="#/surveys:{{survey.id}}" class="list-group-item" ng-repeat="survey in surveys">{{survey.name}}</a>
     </div>
 </div>
