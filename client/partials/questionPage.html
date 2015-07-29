@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <h3>Question {{questionIndex}}</h3>
+    <h3>Question {{questionIndex + 1}}</h3>
 
     <h3>{{question.text}}</h3>
 
@@ -18,8 +18,11 @@
 
     <nav>
         <ul class="pager">
-            <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Prev</a></li>
-            <li class="next"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+            <li class="previous" ng-if="prevQuestionId"><a href="#/surveys/{{surveyId}}/question/{{prevQuestionId}}"><span aria-hidden="true">&larr;</span> Prev</a></li>
+            <li class="next" ng-switch on="!!nextQuestionId">
+                <a href="#/surveys/{{surveyId}}/question/{{nextQuestionId}}" ng-switch-when="true">Next <span aria-hidden="true">&rarr;</span></a>
+                <a href="#/results:{{surveyId}}" ng-switch-when="false">Results <span aria-hidden="true">&rarr;</span></a>
+            </li>
         </ul>
     </nav>
 

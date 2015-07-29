@@ -72,9 +72,17 @@
     function getProgress(survey, index){
         var progress = 100;
         if (survey.questions.length){
-            progress = parseInt((index) * 100 / survey.questions.length, 10);
+            progress = parseInt((index + 1) * 100 / survey.questions.length, 10);
         }
         return progress;
+    }
+
+    function getPrevQuestionId(survey, index) {
+        return index > 0 ? survey.questions[index - 1].id : null;
+    }
+
+    function getNextQuestionId(survey, index) {
+        return index + 1 < survey.questions.length ? survey.questions[index + 1].id : null;
     }
 
     angularModule.controller("surveysListController", function ($scope) {
@@ -87,13 +95,14 @@
 
     angularModule.controller("questionController", function($scope, $routeParams){
         var survey = getSurveyById($routeParams.sid);
-        var questionIndex = getQuestionIndex(survey, $routeParams.qid) + 1;
-
+        var questionIndex = getQuestionIndex(survey, $routeParams.qid);
         $scope.surveyName = survey.name;
+        $scope.surveyId = survey.id;
+        $scope.prevQuestionId = getPrevQuestionId(survey, questionIndex);
+        $scope.nextQuestionId = getNextQuestionId(survey, questionIndex);
         $scope.question = getQuestionById(survey, $routeParams.qid);
         $scope.progress = getProgress(survey, questionIndex);
         $scope.questionIndex = questionIndex;
-
     });
 
 })();
