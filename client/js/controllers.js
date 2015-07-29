@@ -49,7 +49,10 @@
         name: "HR services",
         description : "Provides feedback on HR department work - people hiring and people partners work.",
         questions: []
-    }];
+    }
+    ];
+
+    var results = [];
 
     function getSurveyById(id){
         return _.find(surveyMock, function(item){
@@ -85,12 +88,27 @@
         return index + 1 < survey.questions.length ? survey.questions[index + 1].id : null;
     }
 
+    function getResult(surveyId){
+        return _.find(results, function(item){
+            return item.surveyId === surveyId;
+        });
+    }
+
+
+    function getAnswerByQuestionId(answers, qid){
+        return _.find(answers, function(item){
+            return item.qid === qid;
+        });
+    }
+
     angularModule.controller("surveysListController", function ($scope) {
         $scope.surveys = surveyMock;
-    });
-
-    angularModule.controller("surveyController", function($scope, $routeParams){
-        $scope.survey = getSurveyById($routeParams.id);
+        $scope.startSurvey = function(id){
+            results.push({
+                surveyId : id,
+                answers : []
+            });
+        }
     });
 
     angularModule.controller("questionController", function($scope, $routeParams){
@@ -103,11 +121,22 @@
         $scope.question = getQuestionById(survey, $routeParams.qid);
         $scope.progress = getProgress(survey, questionIndex);
         $scope.questionIndex = questionIndex;
-
         $scope.isAnswerValid = function(){
             return (typeof $scope.userAnswer !== 'undefined');
-        }
+        };
+        $scope.addAnswer = function(){
+            var result = getResult($scope.surveyId);
+            var answer = getAnswerByQuestionId(result.answers, $routeParams.qid);
 
+            if (answer){
+                answer.value = $scope.userAnswer;
+            } else {
+                result.answers.push({
+                    qid : $routeParams.qid,
+                    value: $scope.userAnswer
+                });
+            }
+        };
     });
 
 })();
