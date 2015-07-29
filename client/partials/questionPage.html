@@ -21,7 +21,7 @@
             <li class="previous"  ng-if="prevQuestionId"><a href="#/surveys/{{surveyId}}/question/{{prevQuestionId}}"><span aria-hidden="true">&larr;</span> Prev</a></li>
             <li class="next" ng-class="{'disabled disabled-click': !isAnswerValid()}" ng-switch on="!!nextQuestionId">
                 <a href="#/surveys/{{surveyId}}/question/{{nextQuestionId}}" ng-switch-when="true" ng-click="addAnswer()">Next <span aria-hidden="true">&rarr;</span></a>
-                <a href="#/results/{{surveyId}}" ng-switch-when="false">Results <span aria-hidden="true">&rarr;</span></a>
+                <a href="#/results/{{surveyId}}" ng-switch-when="false" ng-click="addAnswer()">Results <span aria-hidden="true">&rarr;</span></a>
             </li>
         </ul>
     </nav>

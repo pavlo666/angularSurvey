@@ -88,8 +88,16 @@
         return index + 1 < survey.questions.length ? survey.questions[index + 1].id : null;
     }
 
-    function getResult(surveyId){
-        return _.find(results, function(item){
+    function getLastResult(surveyId){
+        var resultsBySurvey = _.filter(results, function(item){
+            return item.surveyId === surveyId;
+        });
+
+        return _.last(resultsBySurvey);
+    }
+
+    function getResultsBySurvey(surveyId){
+        return  _.filter(results, function(item){
             return item.surveyId === surveyId;
         });
     }
@@ -125,7 +133,7 @@
             return (typeof $scope.userAnswer !== 'undefined');
         };
         $scope.addAnswer = function(){
-            var result = getResult($scope.surveyId);
+            var result = getLastResult($scope.surveyId);
             var answer = getAnswerByQuestionId(result.answers, $routeParams.qid);
 
             if (answer){
@@ -138,5 +146,11 @@
             }
         };
     });
+
+
+    angularModule.controller("resultsController", function($scope, $routeParams){
+        $scope.surveyId = $routeParams.id
+        $scope.surveyResults = getResultsBySurvey($routeParams.id);
+    })
 
 })();

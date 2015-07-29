@@ -1,5 +1,32 @@
-<h1>Survey result</h1>
 
-<div> People that take the survey</div>
+<div ng-controller="resultsController">
 
-<div> Some graph</div>
+    <h2>Survey result {{surveyId}}</h2>
+
+    <h3>Results: </h3>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4" ng-repeat="results in surveyResults">
+            <div class="thumbnail">
+
+                <div class="caption">
+                    <h4><span class="label label-default">{{results.sid}}</span></h4>
+
+
+                    <div  ng-repeat="answer in results.answers">
+
+                        <div> {{answer.qid}} </div>
+                        <div> {{answer.value}} </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div> Some graph</div>
+
+</div>
+
