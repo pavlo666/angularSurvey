@@ -103,6 +103,11 @@
         $scope.question = getQuestionById(survey, $routeParams.qid);
         $scope.progress = getProgress(survey, questionIndex);
         $scope.questionIndex = questionIndex;
+
+        $scope.isAnswerValid = function(){
+            return (typeof $scope.userAnswer !== 'undefined');
+        }
+
     });
 
 })();
