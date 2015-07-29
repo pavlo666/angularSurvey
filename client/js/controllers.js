@@ -149,8 +149,13 @@
 
 
     angularModule.controller("resultsController", function($scope, $routeParams){
-        $scope.surveyId = $routeParams.id
+        var survey = getSurveyById($routeParams.id);
+
+        $scope.surveyId = $routeParams.id;
+        $scope.surveyName = survey.name;
         $scope.surveyResults = getResultsBySurvey($routeParams.id);
+
+        $scope.getQuestionNameById
     })
 
 })();
