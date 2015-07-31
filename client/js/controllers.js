@@ -170,7 +170,6 @@
     }
     ];
 
-    var results = [];
 
     function getSurvey(index){
        return surveyMock[index];
@@ -195,34 +194,16 @@
         return progress;
     }
 
-    function getLastResult(surveyId){
-        var resultsBySurvey = _.filter(results, function(item){
-            return item.surveyId === surveyId;
-        });
-
-        return _.last(resultsBySurvey);
-    }
-
-    function getResultsBySurvey(surveyId){
-        return  _.filter(results, function(item){
-            return item.surveyId === surveyId;
-        });
-    }
-
-    function getAnswerByQuestionId(answers, qid){
-        return _.find(answers, function(item){
-            return item.qid === qid;
-        });
+    function updateUserAnswer(surveyId, questionId, userAnswer, prevAnswer) {
+        var question = getQuestion(surveyId, questionId);
+        question.answers[userAnswer].answerCount++;
+        if (typeof prevAnswer !== "undefined"){
+            question.answers[prevAnswer].answerCount--;
+        }
     }
 
     angularModule.controller("surveysListController", function ($scope) {
         $scope.surveys = surveyMock;
-        $scope.startSurvey = function(id){
-            results.push({
-                surveyId : id,
-                answers : []
-            });
-        }
     });
 
     angularModule.controller("questionController", function($scope, $routeParams){
@@ -237,29 +218,15 @@
         $scope.isAnswerValid = function(){
             return (typeof $scope.userAnswer !== 'undefined');
         };
-        $scope.addAnswer = function(){
-            var result = getLastResult(surveyId);
-            var answer = getAnswerByQuestionId(result.answers, questionId);
-
-            if (answer){
-                answer.value = $scope.userAnswer;
-            } else {
-                result.answers.push({
-                    qid : questionId,
-                    value: $scope.userAnswer
-                });
-            }
+        $scope.recordAnswer = function(ev){
+            updateUserAnswer(surveyId, questionId, $scope.userAnswer, $scope.prevAnswer);
+            $scope.prevAnswer = $scope.userAnswer;
         };
     });
-
-    function getAnswerTextByIndex(index) {
-        return "Hello";
-    }
 
     angularModule.controller("resultsController", function($scope, $routeParams){
         var survey = getSurvey($routeParams.id);
         $scope.surveyName = survey.name;
-        $scope.surveyResults = getResultsBySurvey($routeParams.id);
 
         $scope.createPieChart = function (qid, answers){
             var chartColors = [
@@ -267,8 +234,8 @@
             ];
             var dataContent = answers.map(function(answer, index){
                 return {
-                    "label": getAnswerTextByIndex(index),
-                    "value": answer.value,
+                    "label": answer.text,
+                    "value": answer.answerCount,
                     "color": chartColors[index]
                 };
             });

@@ -13,15 +13,15 @@
     <h3>{{question.text}}</h3>
 
     <div class="radio" ng-repeat="answer in question.answers">
-        <label><input type="radio" name="answer" ng-model="$parent.userAnswer" ng-value="$index">{{answer.text}}</label>
+        <label><input type="radio" name="answer" ng-model="$parent.userAnswer" ng-value="$index" ng-change="recordAnswer()">{{answer.text}}</label>
     </div>
 
     <nav>
         <ul class="pager">
             <li class="previous" ng-if="questionIndex > 0"><a href="#/surveys/{{surveyId}}/question/{{questionIndex - 1}}"><span aria-hidden="true">&larr;</span> Prev</a></li>
             <li class="next" ng-class="{'disabled disabled-click': !isAnswerValid()}">
-                <a href="#/surveys/{{surveyId}}/question/{{questionIndex + 1}}" ng-if="progress < 100" ng-click="addAnswer()">Next <span aria-hidden="true">&rarr;</span></a>
-                <a href="#/results/{{surveyId}}" ng-if="progress === 100" ng-click="addAnswer()">Results <span aria-hidden="true">&rarr;</span></a>
+                <a href="#/surveys/{{surveyId}}/question/{{questionIndex + 1}}" ng-if="progress < 100" >Next <span aria-hidden="true">&rarr;</span></a>
+                <a href="#/results/{{surveyId}}" ng-if="progress === 100">Results <span aria-hidden="true">&rarr;</span></a>
             </li>
         </ul>
     </nav>
