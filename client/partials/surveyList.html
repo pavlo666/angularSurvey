@@ -10,9 +10,9 @@
                     <h4><span class="label label-default">{{survey.name}}</span></h4>
                     <h5>{{survey.description}}</h5>
                     <p>
-                        <a href="#/surveys/{{survey.id}}/question/1" class="btn btn-default" ng-click="startSurvey(survey.id)">Start</a>
-                        <a href="#/results/{{survey.id}}" class="btn btn-default">Results</a>
-                        <a href="#/edit:{{survey.id}}" class="btn btn-default">Change</a>
+                        <a href="#/surveys/{{$index}}/question/0" class="btn btn-default" ng-click="startSurvey($index)">Start</a>
+                        <a href="#/results/{{$index}}" class="btn btn-default">Results</a>
+                        <a href="#/edit:{{$index}}" class="btn btn-default">Change</a>
                     </p>
                 </div>
             </div>

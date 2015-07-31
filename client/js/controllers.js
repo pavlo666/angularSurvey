@@ -8,56 +8,172 @@
     var angularModule = angular.module("SRV");
 
     var surveyMock = [{
-        id : "1",
         name: "Office facilities",
         description : "Provide feedback on office facilities suc-h as place, furniture, cleaning, etc.",
         questions: [{
-            id: "1",
             text: "Do you like your seat chair?",
-            answers: [
-                "Yes it is awesome",
-                "It is OK but my neighbour has better",
-                "It sucks"
-            ]},{
-            id: "2",
+            answers: [{
+                text: "Yes it is awesome",
+                answerCount: 0
+            },{
+                text: "It is OK but my neighbour has better",
+                answerCount: 0
+            },{
+                text: "It sucks",
+                answerCount: 0
+            }]
+        },{
             text: "What about air conditioning in your room?",
-            answers: [
-                "Works brilliant",
-                "It works but not so good",
-                "Air conditioning in my room? have not heard.."
-            ]},{
-            id: "3",
+            answers: [{
+                text: "Works brilliant",
+                answerCount: 0
+            },{
+                text: "It works but not so good",
+                answerCount: 0
+            },{
+                text: "Air conditioning in my room? have not heard..",
+                answerCount: 0
+            }]
+        }, {
             text: "Is the room enough big and not too crowded?",
-            answers: [
-                "I have enough space",
-                "More or less OK, but a bit crowded",
-                "I can not stand my room it is very very small"
-            ]}
-        ]
+            answers: [{
+                text: "I have enough space",
+                answerCount: 0
+            }, {
+                text: "More or less OK, but a bit crowded",
+                answerCount: 0
+            }, {
+                text: "I can not stand my room it is very very small",
+                answerCount: 0
+            }]
+        }]
     },{
-        id : "2",
         name: "Finance services",
         description : "Provides feedback on finance department work - compensation and other stuff",
-        questions: []
+        questions: [{
+            text: "Do you like your seat chair?",
+            answers: [{
+                text: "Yes it is awesome",
+                answerCount: 0
+            },{
+                text: "It is OK but my neighbour has better",
+                answerCount: 0
+            },{
+                text: "It sucks",
+                answerCount: 0
+            }]
+        },{
+            text: "What about air conditioning in your room?",
+            answers: [{
+                text: "Works brilliant",
+                answerCount: 0
+            },{
+                text: "It works but not so good",
+                answerCount: 0
+            },{
+                text: "Air conditioning in my room? have not heard..",
+                answerCount: 0
+            }]
+        }, {
+            text: "Is the room enough big and not too crowded?",
+            answers: [{
+                text: "I have enough space",
+                answerCount: 0
+            }, {
+                text: "More or less OK, but a bit crowded",
+                answerCount: 0
+            }, {
+                text: "I can not stand my room it is very very small",
+                answerCount: 0
+            }]
+        }]
     },{
-        id : "3",
         name: "IT service",
         description : "Provide feedback on IT department work, PC and laptops speed of resolving issues.",
-        questions: []
+        questions: [{
+            text: "Do you like your seat chair?",
+            answers: [{
+                text: "Yes it is awesome",
+                answerCount: 0
+            },{
+                text: "It is OK but my neighbour has better",
+                answerCount: 0
+            },{
+                text: "It sucks",
+                answerCount: 0
+            }]
+        },{
+            text: "What about air conditioning in your room?",
+            answers: [{
+                text: "Works brilliant",
+                answerCount: 0
+            },{
+                text: "It works but not so good",
+                answerCount: 0
+            },{
+                text: "Air conditioning in my room? have not heard..",
+                answerCount: 0
+            }]
+        }, {
+            text: "Is the room enough big and not too crowded?",
+            answers: [{
+                text: "I have enough space",
+                answerCount: 0
+            }, {
+                text: "More or less OK, but a bit crowded",
+                answerCount: 0
+            }, {
+                text: "I can not stand my room it is very very small",
+                answerCount: 0
+            }]
+        }]
     },{
-        id : "4",
         name: "HR services",
         description : "Provides feedback on HR department work - people hiring and people partners work.",
-        questions: []
+        questions: [{
+            text: "Do you like your seat chair?",
+            answers: [{
+                text: "Yes it is awesome",
+                answerCount: 0
+            },{
+                text: "It is OK but my neighbour has better",
+                answerCount: 0
+            },{
+                text: "It sucks",
+                answerCount: 0
+            }]
+        },{
+            text: "What about air conditioning in your room?",
+            answers: [{
+                text: "Works brilliant",
+                answerCount: 0
+            },{
+                text: "It works but not so good",
+                answerCount: 0
+            },{
+                text: "Air conditioning in my room? have not heard..",
+                answerCount: 0
+            }]
+        }, {
+            text: "Is the room enough big and not too crowded?",
+            answers: [{
+                text: "I have enough space",
+                answerCount: 0
+            }, {
+                text: "More or less OK, but a bit crowded",
+                answerCount: 0
+            }, {
+                text: "I can not stand my room it is very very small",
+                answerCount: 0
+            }]
+        }]
     }
     ];
 
     var results = [];
 
-    function getSurveyById(id){
-        return _.find(surveyMock, function(item){
-            return item.id === id;
-        });
+    function getSurvey(index){
+       return surveyMock[index];
     }
 
     function getQuestionById(survey, id){
@@ -66,14 +182,13 @@
         });
     }
 
-    function getQuestionIndex(survey, id){
-        return _.findIndex(survey.questions, function(item){
-            return item.id === id;
-        });
+    function getQuestion(surveyIndex, questionIndex){
+        return getSurvey(surveyIndex).questions[questionIndex];
     }
 
-    function getProgress(survey, index){
+    function getProgress(surveyIndex, index){
         var progress = 100;
+        var survey = getSurvey(surveyIndex);
         if (survey.questions.length){
             progress = parseInt((index + 1) * 100 / survey.questions.length, 10);
         }
@@ -102,7 +217,6 @@
         });
     }
 
-
     function getAnswerByQuestionId(answers, qid){
         return _.find(answers, function(item){
             return item.qid === qid;
@@ -120,27 +234,26 @@
     });
 
     angularModule.controller("questionController", function($scope, $routeParams){
-        var survey = getSurveyById($routeParams.sid);
-        var questionIndex = getQuestionIndex(survey, $routeParams.qid);
+        var surveyId = parseInt($routeParams.sid, 10);
+        var questionId = parseInt($routeParams.qid, 10);
+        var survey = getSurvey(surveyId);
         $scope.surveyName = survey.name;
-        $scope.surveyId = survey.id;
-        $scope.prevQuestionId = getPrevQuestionId(survey, questionIndex);
-        $scope.nextQuestionId = getNextQuestionId(survey, questionIndex);
-        $scope.question = getQuestionById(survey, $routeParams.qid);
-        $scope.progress = getProgress(survey, questionIndex);
-        $scope.questionIndex = questionIndex;
+        $scope.surveyId = surveyId;
+        $scope.questionIndex = questionId;
+        $scope.question = getQuestion(surveyId,questionId);
+        $scope.progress = getProgress(surveyId, questionId);
         $scope.isAnswerValid = function(){
             return (typeof $scope.userAnswer !== 'undefined');
         };
         $scope.addAnswer = function(){
-            var result = getLastResult($scope.surveyId);
-            var answer = getAnswerByQuestionId(result.answers, $routeParams.qid);
+            var result = getLastResult(surveyId);
+            var answer = getAnswerByQuestionId(result.answers, questionId);
 
             if (answer){
                 answer.value = $scope.userAnswer;
             } else {
                 result.answers.push({
-                    qid : $routeParams.qid,
+                    qid : questionId,
                     value: $scope.userAnswer
                 });
             }
@@ -152,11 +265,10 @@
     }
 
     angularModule.controller("resultsController", function($scope, $routeParams){
-        var survey = getSurveyById($routeParams.id);
-
-        $scope.surveyId = $routeParams.id;
+        var survey = getSurvey($routeParams.id);
         $scope.surveyName = survey.name;
         $scope.surveyResults = getResultsBySurvey($routeParams.id);
+
         $scope.createPieChart = function (qid, answers){
             var chartColors = [
                 "#7e3838", "#7e6538", "#7c7e38", "#587e38", "#387e45", "#387e6a", "#386a7e"
