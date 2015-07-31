@@ -195,14 +195,6 @@
         return progress;
     }
 
-    function getPrevQuestionId(survey, index) {
-        return index > 0 ? survey.questions[index - 1].id : null;
-    }
-
-    function getNextQuestionId(survey, index) {
-        return index + 1 < survey.questions.length ? survey.questions[index + 1].id : null;
-    }
-
     function getLastResult(surveyId){
         var resultsBySurvey = _.filter(results, function(item){
             return item.surveyId === surveyId;
