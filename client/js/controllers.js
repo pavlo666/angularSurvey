@@ -13,38 +13,47 @@
         questions: [{
             text: "Do you like your seat chair?",
             answers: [{
-                text: "Yes it is awesome",
-                answerCount: 0
+                text: "It is awesome!",
+                answerCount: 5
+            },{
+                text: "This is not important for me",
+                answerCount: 3
             },{
                 text: "It is OK but my neighbour has better",
-                answerCount: 0
-            },{
+                answerCount: 6
+            }, {
                 text: "It sucks",
-                answerCount: 0
+                answerCount: 1
             }]
         },{
             text: "What about air conditioning in your room?",
             answers: [{
-                text: "Works brilliant",
-                answerCount: 0
+                text: "Works brilliant!",
+                answerCount: 3
             },{
                 text: "It works but not so good",
-                answerCount: 0
+                answerCount: 1
             },{
-                text: "Air conditioning in my room? have not heard..",
-                answerCount: 0
+                text: "Not important for me",
+                answerCount: 3
+            },{
+                text: "Not working at all",
+                answerCount: 8
             }]
         }, {
-            text: "Is the room enough big and not too crowded?",
+            text: "Is you working space enough for you?",
             answers: [{
                 text: "I have enough space",
-                answerCount: 0
+                answerCount: 12
             }, {
                 text: "More or less OK, but a bit crowded",
                 answerCount: 0
             }, {
-                text: "I can not stand my room it is very very small",
-                answerCount: 0
+                text: "Not important for me",
+                answerCount: 3
+            }, {
+                text: "I cant stand my room!",
+                answerCount: 1
             }]
         }]
     },{
@@ -175,12 +184,6 @@
        return surveyMock[index];
     }
 
-    function getQuestionById(survey, id){
-        return _.find(survey.questions, function(item){
-            return item.id === id;
-        });
-    }
-
     function getQuestion(surveyIndex, questionIndex){
         return getSurvey(surveyIndex).questions[questionIndex];
     }
@@ -224,79 +227,96 @@
         };
     });
 
+    angularModule.directive("chartForResult", ['$timeout', function ($timeout) {
+        return {
+            restrict: "E",
+            scope: {
+                qid: "@",
+                sid: "@"
+            },
+            link: function (scope, element, attrs){
+                var question = getQuestion(scope.sid, scope.qid);
+                var chartColors = [
+                    "#7e3838", "#7e6538", "#7c7e38", "#587e38", "#387e45", "#387e6a", "#386a7e"
+                ];
+                var dataContent = question.answers.map(function(answer, index){
+                    return {
+                        "label": answer.text,
+                        "value": answer.answerCount,
+                        "color": chartColors[index]
+                    };
+                });
+
+
+                $timeout(function(){
+                    new d3pie("pieChart" + scope.qid, {
+                        "header": {
+                            "title": {
+                                "text": question.text,
+                                "fontSize": 22,
+                                "font": "verdana"
+                            }
+                        },
+                        "footer": {
+                            "text": "by d3pie",
+                            "color": "#999999",
+                            "fontSize": 11,
+                            "font": "open sans",
+                            "location": "bottom-center"
+                        },
+                        "size": {
+                            "canvasHeight": 420,
+                            "canvasWidth": 600,
+                            "pieInnerRadius": "11%",
+                            "pieOuterRadius": "86%"
+                        },
+                        "data": {
+                            "content": dataContent
+                        },
+                        "labels": {
+                            "inner": {
+                                "format": "value"
+                            },
+                            "mainLabel": {
+                                "font": "verdana"
+                            },
+                            "percentage": {
+                                "color": "#e1e1e1",
+                                "font": "verdana",
+                                "decimalPlaces": 0
+                            },
+                            "value": {
+                                "color": "#e1e1e1",
+                                "font": "verdana"
+                            },
+                            "lines": {
+                                "enabled": true,
+                                "color": "#cccccc"
+                            },
+                            "truncation": {
+                                "enabled": true
+                            }
+                        },
+                        "effects": {
+                            "pullOutSegmentOnClick": {
+                                "effect": "linear",
+                                "speed": 400,
+                                "size": 8
+                            }
+                        }
+                    });
+                });
+
+            }
+        }
+    }]);
+
+
     angularModule.controller("resultsController", function($scope, $routeParams){
         var survey = getSurvey($routeParams.id);
         $scope.surveyName = survey.name;
-
-        $scope.createPieChart = function (qid, answers){
-            var chartColors = [
-                "#7e3838", "#7e6538", "#7c7e38", "#587e38", "#387e45", "#387e6a", "#386a7e"
-            ];
-            var dataContent = answers.map(function(answer, index){
-                return {
-                    "label": answer.text,
-                    "value": answer.answerCount,
-                    "color": chartColors[index]
-                };
-            });
-
-            new d3pie("pieChart", {
-                "header": {
-                    "title": {
-                        "text": getQuestionById(qid).text,
-                        "fontSize": 22,
-                        "font": "verdana"
-                    }
-                },
-                "footer": {
-                    "text": "by d3pie",
-                    "color": "#999999",
-                    "fontSize": 11,
-                    "font": "open sans",
-                    "location": "bottom-center"
-                },
-                "size": {
-                    "canvasHeight": 400,
-                    "canvasWidth": 590,
-                    "pieInnerRadius": "11%",
-                    "pieOuterRadius": "86%"
-                },
-                "data": {
-                    "content": dataContent
-                },
-                "labels": {
-                    "inner": {
-                        "format": "value"
-                    },
-                    "mainLabel": {
-                        "font": "verdana"
-                    },
-                    "percentage": {
-                        "color": "#e1e1e1",
-                        "font": "verdana",
-                        "decimalPlaces": 0
-                    },
-                    "value": {
-                        "color": "#e1e1e1",
-                        "font": "verdana"
-                    },
-                    "lines": {
-                        "enabled": true,
-                        "color": "#cccccc"
-                    },
-                    "truncation": {
-                        "enabled": true
-                    }
-                },
-                "effects": {
-                    "pullOutSegmentOnClick": {
-                        "effect": "linear",
-                        "speed": 400,
-                        "size": 8
-                    }
-                }
-            });
-        };
+        $scope.questions = survey.questions;
+        $scope.sid = $routeParams.id
 
     })
 

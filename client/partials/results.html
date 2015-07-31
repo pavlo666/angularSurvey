@@ -4,12 +4,9 @@
     <h3>Result for {{surveyName}} survey:</h3>
 
     <div class="row">
-        <div class="col-sm-6 col-md-4" ng-repeat="results in surveyResults">
-            <div class="thumbnail">
-                <div class="caption">
-                    <h4><span class="label label-default"></span></h4>
-                    <div id="pieChart"></div>
-                </div>
+        <div class="col-sm-8" ng-repeat="question in questions">
+            <div class="thumbnail chart">
+                <chart-for-result qid="{{$index}}" sid="{{sid}}" id="{{'pieChart' + $index}}"></chart-for-result>
             </div>
         </div>
     </div>
