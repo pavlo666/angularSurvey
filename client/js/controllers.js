@@ -266,7 +266,7 @@
                         },
                         "size": {
                             "canvasHeight": 420,
-                            "canvasWidth": 600,
+                            "canvasWidth": 640,
                             "pieInnerRadius": "11%",
                             "pieOuterRadius": "86%"
                         },
