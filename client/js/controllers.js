@@ -147,6 +147,9 @@
         };
     });
 
+    function getAnswerTextByIndex(index) {
+        return "Hello";
+    }
 
     angularModule.controller("resultsController", function($scope, $routeParams){
         var survey = getSurveyById($routeParams.id);
@@ -154,107 +157,75 @@
         $scope.surveyId = $routeParams.id;
         $scope.surveyName = survey.name;
         $scope.surveyResults = getResultsBySurvey($routeParams.id);
+        $scope.createPieChart = function (qid, answers){
+            var chartColors = [
+                "#7e3838", "#7e6538", "#7c7e38", "#587e38", "#387e45", "#387e6a", "#386a7e"
+            ];
+            var dataContent = answers.map(function(answer, index){
+                return {
+                    "label": getAnswerTextByIndex(index),
+                    "value": answer.value,
+                    "color": chartColors[index]
+                };
+            });
 
-
-        var pie = new d3pie("pieChart", {
-            "header": {
-                "title": {
-                    "text": "{{survey.name}}",
-                    "fontSize": 22,
-                    "font": "verdana"
-                },
-                "subtitle": {
-                    "text": "{{question.text}}",
-                    "color": "#999999",
-                    "fontSize": 10,
-                    "font": "verdana"
-                },
-                "titleSubtitlePadding": 12
-            },
-            "footer": {
-                "text": "by d3pie",
-                "color": "#999999",
-                "fontSize": 11,
-                "font": "open sans",
-                "location": "bottom-center"
-            },
-            "size": {
-                "canvasHeight": 400,
-                "canvasWidth": 590,
-                "pieInnerRadius": "11%",
-                "pieOuterRadius": "86%"
-            },
-            "data": {
-                "content": [
-                    {
-                        "label": "When's it going to be done?",
-                        "value": 8,
-                        "color": "#7e3838"
-                    },
-                    {
-                        "label": "Bennnnn!",
-                        "value": 5,
-                        "color": "#7e6538"
-                    },
-                    {
-                        "label": "Oh, god.",
-                        "value": 2,
-                        "color": "#7c7e38"
-                    },
-                    {
-                        "label": "But it's Friday night!",
-                        "value": 3,
-                        "color": "#587e38"
-                    },
-                    {
-                        "label": "Again?",
-                        "value": 2,
-                        "color": "#387e45"
-                    },
-                    {
-                        "label": "I'm considering an affair.",
-                        "value": 1,
-                        "color": "#387e6a"
-                    },
-                    {
-                        "label": "[baleful stare]",
-                        "value": 3,
-                        "color": "#386a7e"
+            new d3pie("pieChart", {
+                "header": {
+                    "title": {
+                        "text": getQuestionById(qid).text,
+                        "fontSize": 22,
+                        "font": "verdana"
                     }
-                ]
-            },
-            "labels": {
-                "inner": {
-                    "format": "value"
                 },
-                "mainLabel": {
-                    "font": "verdana"
+                "footer": {
+                    "text": "by d3pie",
+                    "color": "#999999",
+                    "fontSize": 11,
+                    "font": "open sans",
+                    "location": "bottom-center"
                 },
-                "percentage": {
-                    "color": "#e1e1e1",
-                    "font": "verdana",
-                    "decimalPlaces": 0
+                "size": {
+                    "canvasHeight": 400,
+                    "canvasWidth": 590,
+                    "pieInnerRadius": "11%",
+                    "pieOuterRadius": "86%"
                 },
-                "value": {
-                    "color": "#e1e1e1",
-                    "font": "verdana"
+                "data": {
+                    "content": dataContent
                 },
-                "lines": {
-                    "enabled": true,
-                    "color": "#cccccc"
+                "labels": {
+                    "inner": {
+                        "format": "value"
+                    },
+                    "mainLabel": {
+                        "font": "verdana"
+                    },
+                    "percentage": {
+                        "color": "#e1e1e1",
+                        "font": "verdana",
+                        "decimalPlaces": 0
+                    },
+                    "value": {
+                        "color": "#e1e1e1",
+                        "font": "verdana"
+                    },
+                    "lines": {
+                        "enabled": true,
+                        "color": "#cccccc"
+                    },
+                    "truncation": {
+                        "enabled": true
+                    }
                 },
-                "truncation": {
-                    "enabled": true
+                "effects": {
+                    "pullOutSegmentOnClick": {
+                        "effect": "linear",
+                        "speed": 400,
+                        "size": 8
+                    }
                 }
-            },
-            "effects": {
-                "pullOutSegmentOnClick": {
-                    "effect": "linear",
-                    "speed": 400,
-                    "size": 8
-                }
-            }
-        });
+            });
+        };
 
     })
 
