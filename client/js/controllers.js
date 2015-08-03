@@ -333,16 +333,16 @@
             $scope.survey.questions.push({
                 text: $scope.newQuestion,
                 answers : [{
-                    text: "Bla",
-                    answerCount: 1
+                    text: "Yes!",
+                    answerCount: 0
                 },{
-                    text: "Bla1",
-                    answerCount: 2
+                    text: "No!",
+                    answerCount: 0
                 },{
-                    text: "Bla2",
-                    answerCount: 3
+                    text: "I do not know",
+                    answerCount: 0
                 }]
-            })
+            });
         };
 
     });
