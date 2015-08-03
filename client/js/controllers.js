@@ -311,13 +311,16 @@
         }
     }]);
 
-
     angularModule.controller("resultsController", function($scope, $routeParams){
         var survey = getSurvey($routeParams.id);
         $scope.surveyName = survey.name;
         $scope.questions = survey.questions;
         $scope.sid = $routeParams.id
 
-    })
+    });
+
+    angularModule.controller("addSurveyController", function($scope, $routeParams){
+
+    });
 
 })();

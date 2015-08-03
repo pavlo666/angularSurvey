@@ -1,31 +1,31 @@
+<div ng-controller="addSurveyController">
+    <h2>Add survey</h2>
 
-<h1>Add survey</h1>
-
-<div class="input-group">
-    <span class="input-group-addon" id="name">Name</span>
-    <input type="text" class="form-control" placeholder="Survey name" aria-describedby="name">
-</div>
-<br/>
-<div class="input-group">
-    <span class="input-group-addon" id="description">Description</span>
-    <input type="text" class="form-control" placeholder="Survey description" aria-describedby="description">
-</div>
+    <div class="input-group">
+        <span class="input-group-addon" id="name">Name</span>
+        <input type="text" class="form-control" placeholder="Survey name" aria-describedby="name">
+    </div>
+    <br/>
+    <div class="input-group">
+        <span class="input-group-addon" id="description">Description</span>
+        <input type="text" class="form-control" placeholder="Survey description" aria-describedby="description">
+    </div>
 
 
-<h3>Question List</h3>
+    <h3>Question List</h3>
 
-<div class="input-group">
-    <input type="text" class="form-control" placeholder="Add the question">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Add the question">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button">Add!</button>
       </span>
+    </div>
+
+
+    <nav>
+        <ul class="pager">
+            <li class="previous"><a href="#/surveys"><span aria-hidden="true">&larr;</span> Cancel</a></li>
+            <li class="next"><a href="#">Add <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+    </nav>
 </div>
-
-
-<nav>
-    <ul class="pager">
-        <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Cancel</a></li>
-        <li class="next"><a href="#">Add <span aria-hidden="true">&rarr;</span></a></li>
-    </ul>
-</nav>
-
