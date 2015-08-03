@@ -42,3 +42,8 @@ code {
     pointer-events: none;
 }
 
+.description {
+    height: 30px;
+    overflow: hidden;
+}
+
