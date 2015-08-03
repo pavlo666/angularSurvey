@@ -15,9 +15,12 @@
     <h3>Question List</h3>
 
     <div class="input-group">
-        <input type="text" class="form-control" placeholder="Add the question">
+        <ul class="list-group" ng-repeat="question in questions">
+            <li class="list-group-item">{{question.text}}</li>
+        </ul>
+        <input type="text" class="form-control" placeholder="Add the question" ng-model="newQuestion">
         <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Add!</button>
+        <button class="btn btn-default" type="button" ng-click="addQuestion()">Add!</button>
       </span>
     </div>
 

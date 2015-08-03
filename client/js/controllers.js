@@ -205,8 +205,8 @@
         }
     }
 
-    function addSurveyToList(name, description) {
-        surveyMock.push({name: name, description: description});
+    function addSurveyToList(survey) {
+        surveyMock.push(survey);
     }
 
     angularModule.controller("surveysListController", function ($scope) {
@@ -320,15 +320,28 @@
         $scope.surveyName = survey.name;
         $scope.questions = survey.questions;
         $scope.sid = $routeParams.id
-
     });
 
-
-
     angularModule.controller("addSurveyController", function($scope, $routeParams){
-        $scope.survey = {};
+        $scope.survey = {name: "", description: "", questions: []};
         $scope.addSurvey = function(){
-            addSurveyToList($scope.survey.name, $scope.survey.description)
+            addSurveyToList($scope.survey)
+        };
+
+        $scope.addQuestion = function(){
+            $scope.survey.questions.push({
+                text: $scope.newQuestion,
+                answers : [{
+                    text: "Bla",
+                    answerCount: 1
+                },{
+                    text: "Bla1",
+                    answerCount: 2
+                },{
+                    text: "Bla2",
+                    answerCount: 3
+                }]
+            })
         }
     });
 
