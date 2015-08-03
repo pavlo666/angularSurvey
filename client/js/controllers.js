@@ -205,6 +205,10 @@
         }
     }
 
+    function addSurveyToList(name, description) {
+        surveyMock.push({name: name, description: description});
+    }
+
     angularModule.controller("surveysListController", function ($scope) {
         $scope.surveys = surveyMock;
     });
@@ -319,8 +323,13 @@
 
     });
 
-    angularModule.controller("addSurveyController", function($scope, $routeParams){
 
+
+    angularModule.controller("addSurveyController", function($scope, $routeParams){
+        $scope.survey = {};
+        $scope.addSurvey = function(){
+            addSurveyToList($scope.survey.name, $scope.survey.description)
+        }
     });
 
 })();

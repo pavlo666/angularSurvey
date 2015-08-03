@@ -3,12 +3,12 @@
 
     <div class="input-group">
         <span class="input-group-addon" id="name">Name</span>
-        <input type="text" class="form-control" placeholder="Survey name" aria-describedby="name">
+        <input type="text" class="form-control" placeholder="Survey name" aria-describedby="name" ng-model="survey.name">
     </div>
     <br/>
     <div class="input-group">
         <span class="input-group-addon" id="description">Description</span>
-        <input type="text" class="form-control" placeholder="Survey description" aria-describedby="description">
+        <input type="text" class="form-control" placeholder="Survey description" aria-describedby="description" ng-model="survey.description">
     </div>
 
 
@@ -16,7 +16,7 @@
 
     <div class="input-group">
         <input type="text" class="form-control" placeholder="Add the question">
-      <span class="input-group-btn">
+        <span class="input-group-btn">
         <button class="btn btn-default" type="button">Add!</button>
       </span>
     </div>
@@ -25,7 +25,7 @@
     <nav>
         <ul class="pager">
             <li class="previous"><a href="#/surveys"><span aria-hidden="true">&larr;</span> Cancel</a></li>
-            <li class="next"><a href="#">Add <span aria-hidden="true">&rarr;</span></a></li>
+            <li class="next"><a href="#/surveys" ng-click="addSurvey()">Add <span aria-hidden="true">&rarr;</span></a></li>
         </ul>
     </nav>
 </div>
