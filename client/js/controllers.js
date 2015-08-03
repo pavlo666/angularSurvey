@@ -324,8 +324,9 @@
 
     angularModule.controller("addSurveyController", function($scope, $routeParams){
         $scope.survey = {name: "", description: "", questions: []};
+
         $scope.addSurvey = function(){
-            addSurveyToList($scope.survey)
+            addSurveyToList($scope.survey);
         };
 
         $scope.addQuestion = function(){
@@ -342,7 +343,8 @@
                     answerCount: 3
                 }]
             })
-        }
+        };
+
     });
 
 })();
