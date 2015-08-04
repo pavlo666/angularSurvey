@@ -3,7 +3,7 @@
 (function () {
     "use strict";
 
-    var angularModule = angular.module('SRV', [ 'ngRoute', 'SRV.controllers']);
+    var angularModule = angular.module('SRV', [ 'ngRoute', "SRV.controllers", "SRV.directives"]);
 
     angularModule.config(['$routeProvider', function($routeProvider) {
         $routeProvider.
