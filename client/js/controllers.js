@@ -1,7 +1,4 @@
-/**
- * Created by pavlo.halan on 7/28/2015.
- */
-/*global app:true, tools:true */
+/* global angular : true, d3pie: true*/
 (function () {
     "use strict";
 
@@ -179,7 +176,6 @@
     }
     ];
 
-
     function getSurvey(index){
        return surveyMock[index];
     }
@@ -217,6 +213,7 @@
         var surveyId = parseInt($routeParams.sid, 10);
         var questionId = parseInt($routeParams.qid, 10);
         var survey = getSurvey(surveyId);
+        $scope.userAnswer = null;
         $scope.surveyName = survey.name;
         $scope.surveyId = surveyId;
         $scope.questionIndex = questionId;
@@ -225,20 +222,21 @@
         $scope.isAnswerValid = function(){
             return (typeof $scope.userAnswer !== 'undefined');
         };
-        $scope.recordAnswer = function(ev){
+        $scope.recordAnswer = function(){
             updateUserAnswer(surveyId, questionId, $scope.userAnswer, $scope.prevAnswer);
             $scope.prevAnswer = $scope.userAnswer;
         };
     });
 
     angularModule.directive("chartForResult", ['$timeout', function ($timeout) {
+        var pie;
         return {
             restrict: "E",
             scope: {
                 qid: "@",
                 sid: "@"
             },
-            link: function (scope, element, attrs){
+            link: function (scope){
                 var question = getQuestion(scope.sid, scope.qid);
                 var chartColors = [
                     "#7e3838", "#7e6538", "#7c7e38", "#587e38", "#387e45", "#387e6a", "#386a7e"
@@ -253,7 +251,7 @@
 
 
                 $timeout(function(){
-                    new d3pie("pieChart" + scope.qid, {
+                    pie = new d3pie("pieChart" + scope.qid, {
                         "header": {
                             "title": {
                                 "text": question.text,
@@ -312,19 +310,20 @@
                 });
 
             }
-        }
+        };
     }]);
 
     angularModule.controller("resultsController", function($scope, $routeParams){
         var survey = getSurvey($routeParams.id);
         $scope.surveyName = survey.name;
         $scope.questions = survey.questions;
-        $scope.sid = $routeParams.id
+        $scope.sid = $routeParams.id;
     });
 
     angularModule.controller("addSurveyController", function($scope, $routeParams){
-        $scope.survey = {name: "", description: "", questions: []};
-
+        var surveyId = $routeParams.id;
+        $scope.survey = (typeof surveyId !== "undefined") ? getSurvey(surveyId) : {name: "", description: "", questions: []};
+        $scope.newQuestion = "";
         $scope.addSurvey = function(){
             addSurveyToList($scope.survey);
         };

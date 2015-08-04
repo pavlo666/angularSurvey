@@ -11,9 +11,7 @@
         <input type="text" class="form-control" placeholder="Survey description" aria-describedby="description" ng-model="survey.description">
     </div>
 
-
     <h3>Question List</h3>
-
 
     <ul class="list-group" >
         <li class="list-group-item" ng-repeat="question in survey.questions">{{$index + 1}} . {{question.text}}</li>
@@ -24,7 +22,6 @@
                 <button class="btn btn-default" type="button" ng-click="addQuestion()">Add!</button>
             </span>
     </div>
-
 
     <nav>
         <ul class="pager">

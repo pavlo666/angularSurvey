@@ -1,5 +1,5 @@
 
-/*global app:true, tools:true */
+/*global angular: true */
 (function () {
     "use strict";
 
