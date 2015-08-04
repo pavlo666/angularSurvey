@@ -185,15 +185,6 @@
             return getSurvey(surveyIndex).questions[questionIndex];
         }
 
-        function getProgress(surveyIndex, index){
-            var progress = 100;
-            var survey = getSurvey(surveyIndex);
-            if (survey.questions.length){
-                progress = parseInt((index + 1) * 100 / survey.questions.length, 10);
-            }
-            return progress;
-        }
-
         function updateUserAnswer(surveyId, questionId, userAnswer, prevAnswer) {
             var question = getQuestion(surveyId, questionId);
             question.answers[userAnswer].answerCount++;
@@ -212,7 +203,6 @@
             },
             getSurvey: getSurvey,
             getQuestion: getQuestion,
-            getProgress: getProgress,
             updateUserAnswer: updateUserAnswer,
             addSurveyToList: addSurveyToList
         };

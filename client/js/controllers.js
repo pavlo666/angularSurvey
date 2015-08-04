@@ -17,7 +17,15 @@
         $scope.surveyId = surveyId;
         $scope.questionIndex = questionId;
         $scope.question = surveyStore.getQuestion(surveyId,questionId);
-        $scope.progress = surveyStore.getProgress(surveyId, questionId);
+        $scope.getProgress = function (){
+            var progress = 100;
+            if (survey.questions.length){
+                progress = parseInt((questionId + 1) * 100 / survey.questions.length, 10);
+            }
+            return progress;
+        };
+
+
         $scope.isAnswerValid = function(){
             return (typeof $scope.userAnswer !== 'undefined');
         };

@@ -3,8 +3,8 @@
 
     <div class="progress">
         <div class="progress-bar progress-bar-striped active" role="progressbar"
-             aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%">
-            {{progress}}%
+             aria-valuenow="{{getProgress()}}" aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress()}}%">
+            {{getProgress()}}%
         </div>
     </div>
 
@@ -20,8 +20,8 @@
         <ul class="pager">
             <li class="previous" ng-if="questionIndex > 0"><a href="#/surveys/{{surveyId}}/question/{{questionIndex - 1}}"><span aria-hidden="true">&larr;</span> Prev</a></li>
             <li class="next" ng-class="{'disabled disabled-click': !isAnswerValid()}">
-                <a href="#/surveys/{{surveyId}}/question/{{questionIndex + 1}}" ng-if="progress < 100" >Next <span aria-hidden="true">&rarr;</span></a>
-                <a href="#/results/{{surveyId}}" ng-if="progress === 100">Results <span aria-hidden="true">&rarr;</span></a>
+                <a href="#/surveys/{{surveyId}}/question/{{questionIndex + 1}}" ng-if="getProgress() < 100" >Next <span aria-hidden="true">&rarr;</span></a>
+                <a href="#/results/{{surveyId}}" ng-if="getProgress() === 100">Results <span aria-hidden="true">&rarr;</span></a>
             </li>
         </ul>
     </nav>
