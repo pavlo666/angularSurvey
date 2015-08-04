@@ -323,6 +323,7 @@
     angularModule.controller("addSurveyController", function($scope, $routeParams){
         var surveyId = $routeParams.id;
         $scope.survey = (typeof surveyId !== "undefined") ? getSurvey(surveyId) : {name: "", description: "", questions: []};
+        $scope.title = (typeof surveyId !== "undefined") ? "Edit survey" : "Add survey";
         $scope.newQuestion = "";
         $scope.addSurvey = function(){
             addSurveyToList($scope.survey);
