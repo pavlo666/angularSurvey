@@ -2,231 +2,247 @@
 (function () {
     "use strict";
 
-    var angularModule = angular.module("SRV");
+    var serviceModule = angular.module("SRV.services", []);
 
-    var surveyMock = [{
-        name: "Office facilities",
-        description : "Provide feedback on office facilities suc-h as place, furniture, cleaning, etc.",
-        questions: [{
-            text: "Do you like your seat chair?",
-            answers: [{
-                text: "It is awesome!",
-                answerCount: 5
+    serviceModule.factory("surveyStore", function(){
+        var surveyMock = [{
+            name: "Office facilities",
+            description : "Provide feedback on office facilities suc-h as place, furniture, cleaning, etc.",
+            questions: [{
+                text: "Do you like your seat chair?",
+                answers: [{
+                    text: "It is awesome!",
+                    answerCount: 5
+                },{
+                    text: "This is not important for me",
+                    answerCount: 3
+                },{
+                    text: "It is OK but my neighbour has better",
+                    answerCount: 6
+                }, {
+                    text: "It sucks",
+                    answerCount: 1
+                }]
             },{
-                text: "This is not important for me",
-                answerCount: 3
-            },{
-                text: "It is OK but my neighbour has better",
-                answerCount: 6
+                text: "What about air conditioning in your room?",
+                answers: [{
+                    text: "Works brilliant!",
+                    answerCount: 3
+                },{
+                    text: "It works but not so good",
+                    answerCount: 1
+                },{
+                    text: "Not important for me",
+                    answerCount: 3
+                },{
+                    text: "Not working at all",
+                    answerCount: 8
+                }]
             }, {
-                text: "It sucks",
-                answerCount: 1
+                text: "Is you working space enough for you?",
+                answers: [{
+                    text: "I have enough space",
+                    answerCount: 12
+                }, {
+                    text: "More or less OK, but a bit crowded",
+                    answerCount: 0
+                }, {
+                    text: "Not important for me",
+                    answerCount: 3
+                }, {
+                    text: "I cant stand my room!",
+                    answerCount: 1
+                }]
             }]
         },{
-            text: "What about air conditioning in your room?",
-            answers: [{
-                text: "Works brilliant!",
-                answerCount: 3
+            name: "Finance services",
+            description : "Provides feedback on finance department work - compensation and other stuff",
+            questions: [{
+                text: "Do you like your seat chair?",
+                answers: [{
+                    text: "Yes it is awesome",
+                    answerCount: 0
+                },{
+                    text: "It is OK but my neighbour has better",
+                    answerCount: 0
+                },{
+                    text: "It sucks",
+                    answerCount: 0
+                }]
             },{
-                text: "It works but not so good",
-                answerCount: 1
-            },{
-                text: "Not important for me",
-                answerCount: 3
-            },{
-                text: "Not working at all",
-                answerCount: 8
-            }]
-        }, {
-            text: "Is you working space enough for you?",
-            answers: [{
-                text: "I have enough space",
-                answerCount: 12
+                text: "What about air conditioning in your room?",
+                answers: [{
+                    text: "Works brilliant",
+                    answerCount: 0
+                },{
+                    text: "It works but not so good",
+                    answerCount: 0
+                },{
+                    text: "Air conditioning in my room? have not heard..",
+                    answerCount: 0
+                }]
             }, {
-                text: "More or less OK, but a bit crowded",
-                answerCount: 0
-            }, {
-                text: "Not important for me",
-                answerCount: 3
-            }, {
-                text: "I cant stand my room!",
-                answerCount: 1
-            }]
-        }]
-    },{
-        name: "Finance services",
-        description : "Provides feedback on finance department work - compensation and other stuff",
-        questions: [{
-            text: "Do you like your seat chair?",
-            answers: [{
-                text: "Yes it is awesome",
-                answerCount: 0
-            },{
-                text: "It is OK but my neighbour has better",
-                answerCount: 0
-            },{
-                text: "It sucks",
-                answerCount: 0
+                text: "Is the room enough big and not too crowded?",
+                answers: [{
+                    text: "I have enough space",
+                    answerCount: 0
+                }, {
+                    text: "More or less OK, but a bit crowded",
+                    answerCount: 0
+                }, {
+                    text: "I can not stand my room it is very very small",
+                    answerCount: 0
+                }]
             }]
         },{
-            text: "What about air conditioning in your room?",
-            answers: [{
-                text: "Works brilliant",
-                answerCount: 0
+            name: "IT service",
+            description : "Provide feedback on IT department work, PC and laptops speed of resolving issues.",
+            questions: [{
+                text: "Do you like your seat chair?",
+                answers: [{
+                    text: "Yes it is awesome",
+                    answerCount: 0
+                },{
+                    text: "It is OK but my neighbour has better",
+                    answerCount: 0
+                },{
+                    text: "It sucks",
+                    answerCount: 0
+                }]
             },{
-                text: "It works but not so good",
-                answerCount: 0
-            },{
-                text: "Air conditioning in my room? have not heard..",
-                answerCount: 0
-            }]
-        }, {
-            text: "Is the room enough big and not too crowded?",
-            answers: [{
-                text: "I have enough space",
-                answerCount: 0
+                text: "What about air conditioning in your room?",
+                answers: [{
+                    text: "Works brilliant",
+                    answerCount: 0
+                },{
+                    text: "It works but not so good",
+                    answerCount: 0
+                },{
+                    text: "Air conditioning in my room? have not heard..",
+                    answerCount: 0
+                }]
             }, {
-                text: "More or less OK, but a bit crowded",
-                answerCount: 0
-            }, {
-                text: "I can not stand my room it is very very small",
-                answerCount: 0
-            }]
-        }]
-    },{
-        name: "IT service",
-        description : "Provide feedback on IT department work, PC and laptops speed of resolving issues.",
-        questions: [{
-            text: "Do you like your seat chair?",
-            answers: [{
-                text: "Yes it is awesome",
-                answerCount: 0
-            },{
-                text: "It is OK but my neighbour has better",
-                answerCount: 0
-            },{
-                text: "It sucks",
-                answerCount: 0
+                text: "Is the room enough big and not too crowded?",
+                answers: [{
+                    text: "I have enough space",
+                    answerCount: 0
+                }, {
+                    text: "More or less OK, but a bit crowded",
+                    answerCount: 0
+                }, {
+                    text: "I can not stand my room it is very very small",
+                    answerCount: 0
+                }]
             }]
         },{
-            text: "What about air conditioning in your room?",
-            answers: [{
-                text: "Works brilliant",
-                answerCount: 0
+            name: "HR services",
+            description : "Provides feedback on HR department work - people hiring and people partners work.",
+            questions: [{
+                text: "Do you like your seat chair?",
+                answers: [{
+                    text: "Yes it is awesome",
+                    answerCount: 0
+                },{
+                    text: "It is OK but my neighbour has better",
+                    answerCount: 0
+                },{
+                    text: "It sucks",
+                    answerCount: 0
+                }]
             },{
-                text: "It works but not so good",
-                answerCount: 0
-            },{
-                text: "Air conditioning in my room? have not heard..",
-                answerCount: 0
-            }]
-        }, {
-            text: "Is the room enough big and not too crowded?",
-            answers: [{
-                text: "I have enough space",
-                answerCount: 0
+                text: "What about air conditioning in your room?",
+                answers: [{
+                    text: "Works brilliant",
+                    answerCount: 0
+                },{
+                    text: "It works but not so good",
+                    answerCount: 0
+                },{
+                    text: "Air conditioning in my room? have not heard..",
+                    answerCount: 0
+                }]
             }, {
-                text: "More or less OK, but a bit crowded",
-                answerCount: 0
-            }, {
-                text: "I can not stand my room it is very very small",
-                answerCount: 0
+                text: "Is the room enough big and not too crowded?",
+                answers: [{
+                    text: "I have enough space",
+                    answerCount: 0
+                }, {
+                    text: "More or less OK, but a bit crowded",
+                    answerCount: 0
+                }, {
+                    text: "I can not stand my room it is very very small",
+                    answerCount: 0
+                }]
             }]
-        }]
-    },{
-        name: "HR services",
-        description : "Provides feedback on HR department work - people hiring and people partners work.",
-        questions: [{
-            text: "Do you like your seat chair?",
-            answers: [{
-                text: "Yes it is awesome",
-                answerCount: 0
-            },{
-                text: "It is OK but my neighbour has better",
-                answerCount: 0
-            },{
-                text: "It sucks",
-                answerCount: 0
-            }]
-        },{
-            text: "What about air conditioning in your room?",
-            answers: [{
-                text: "Works brilliant",
-                answerCount: 0
-            },{
-                text: "It works but not so good",
-                answerCount: 0
-            },{
-                text: "Air conditioning in my room? have not heard..",
-                answerCount: 0
-            }]
-        }, {
-            text: "Is the room enough big and not too crowded?",
-            answers: [{
-                text: "I have enough space",
-                answerCount: 0
-            }, {
-                text: "More or less OK, but a bit crowded",
-                answerCount: 0
-            }, {
-                text: "I can not stand my room it is very very small",
-                answerCount: 0
-            }]
-        }]
-    }
-    ];
-
-    function getSurvey(index){
-       return surveyMock[index];
-    }
-
-    function getQuestion(surveyIndex, questionIndex){
-        return getSurvey(surveyIndex).questions[questionIndex];
-    }
-
-    function getProgress(surveyIndex, index){
-        var progress = 100;
-        var survey = getSurvey(surveyIndex);
-        if (survey.questions.length){
-            progress = parseInt((index + 1) * 100 / survey.questions.length, 10);
         }
-        return progress;
-    }
+        ];
 
-    function updateUserAnswer(surveyId, questionId, userAnswer, prevAnswer) {
-        var question = getQuestion(surveyId, questionId);
-        question.answers[userAnswer].answerCount++;
-        if (typeof prevAnswer !== "undefined"){
-            question.answers[prevAnswer].answerCount--;
+        function getSurvey(index){
+            return surveyMock[index];
         }
-    }
 
-    function addSurveyToList(survey) {
-        surveyMock.push(survey);
-    }
+        function getQuestion(surveyIndex, questionIndex){
+            return getSurvey(surveyIndex).questions[questionIndex];
+        }
 
-    angularModule.controller("surveysListController", function ($scope) {
-        $scope.surveys = surveyMock;
+        function getProgress(surveyIndex, index){
+            var progress = 100;
+            var survey = getSurvey(surveyIndex);
+            if (survey.questions.length){
+                progress = parseInt((index + 1) * 100 / survey.questions.length, 10);
+            }
+            return progress;
+        }
+
+        function updateUserAnswer(surveyId, questionId, userAnswer, prevAnswer) {
+            var question = getQuestion(surveyId, questionId);
+            question.answers[userAnswer].answerCount++;
+            if (typeof prevAnswer !== "undefined"){
+                question.answers[prevAnswer].answerCount--;
+            }
+        }
+
+        function addSurveyToList(survey) {
+            surveyMock.push(survey);
+        }
+
+        return {
+            getSurveyList: function(){
+                return surveyMock;
+            },
+            getSurvey: getSurvey,
+            getQuestion: getQuestion,
+            getProgress: getProgress,
+            updateUserAnswer: updateUserAnswer,
+            addSurveyToList: addSurveyToList
+
+        };
     });
 
-    angularModule.controller("questionController", function($scope, $routeParams){
+    var angularModule = angular.module("SRV.controllers", ["SRV.services"]);
+
+    angularModule.controller("surveysListController", ["$scope", "surveyStore", function ($scope, surveyStore) {
+        $scope.surveys = surveyStore.getSurveyList();
+    }]);
+
+    angularModule.controller("questionController", ["$scope", "surveyStore", function($scope, surveyStore, $routeParams){
         var surveyId = parseInt($routeParams.sid, 10);
         var questionId = parseInt($routeParams.qid, 10);
-        var survey = getSurvey(surveyId);
+        var survey = surveyStore.getSurvey(surveyId);
         $scope.userAnswer = null;
         $scope.surveyName = survey.name;
         $scope.surveyId = surveyId;
         $scope.questionIndex = questionId;
-        $scope.question = getQuestion(surveyId,questionId);
-        $scope.progress = getProgress(surveyId, questionId);
+        $scope.question = surveyStore.getQuestion(surveyId,questionId);
+        $scope.progress = surveyStore.getProgress(surveyId, questionId);
         $scope.isAnswerValid = function(){
             return (typeof $scope.userAnswer !== 'undefined');
         };
         $scope.recordAnswer = function(){
-            updateUserAnswer(surveyId, questionId, $scope.userAnswer, $scope.prevAnswer);
+            surveyStore.updateUserAnswer(surveyId, questionId, $scope.userAnswer, $scope.prevAnswer);
             $scope.prevAnswer = $scope.userAnswer;
         };
-    });
+    }]);
 
     angularModule.directive("chartForResult", ['$timeout', function ($timeout) {
         var pie;
@@ -313,20 +329,20 @@
         };
     }]);
 
-    angularModule.controller("resultsController", function($scope, $routeParams){
-        var survey = getSurvey($routeParams.id);
+    angularModule.controller("resultsController", ["$scope", "surveyStore", function($scope, surveyStore, $routeParams){
+        var survey = surveyStore.getSurvey($routeParams.id);
         $scope.surveyName = survey.name;
         $scope.questions = survey.questions;
         $scope.sid = $routeParams.id;
-    });
+    }]);
 
-    angularModule.controller("addSurveyController", function($scope, $routeParams){
+    angularModule.controller("addSurveyController", ["$scope", "surveyStore", "$routeParams", function($scope, surveyStore, $routeParams){
         var surveyId = $routeParams.id;
-        $scope.survey = (typeof surveyId !== "undefined") ? getSurvey(surveyId) : {name: "", description: "", questions: []};
+        $scope.survey = (typeof surveyId !== "undefined") ? surveyStore.getSurvey(surveyId) : {name: "", description: "", questions: []};
         $scope.title = (typeof surveyId !== "undefined") ? "Edit survey" : "Add survey";
         $scope.newQuestion = "";
         $scope.addSurvey = function(){
-            addSurveyToList($scope.survey);
+            surveyStore.addSurveyToList($scope.survey);
         };
 
         $scope.addQuestion = function(){
@@ -345,6 +361,6 @@
             });
         };
 
-    });
+    }]);
 
 })();
