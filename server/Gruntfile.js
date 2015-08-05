@@ -5,6 +5,7 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-protractor-runner');
 
     grunt.initConfig({
         karma: {
@@ -24,6 +25,17 @@ module.exports = function (grunt) {
         },
         jshint: {
             all: ['Gruntfile.js', '../client/js/*.js']
+        },
+        protractor: {
+            options: {
+                configFile: "protractor.js",
+                keepAlive: true,
+                noColor: false,
+                args: {}
+            },
+            your_target: {
+                all: {}
+            }
         }
     });
 
